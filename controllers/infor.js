@@ -53,7 +53,7 @@ exports.postEditInformation = (req, res, next) => {
     .then((user) => {
       
       if(img){
-          // fileHelper.deleteFile(user.imgUrl);
+          fileHelper.deleteFile(user.imgUrl);
           const imgUrl = img.path;
           user.imgUrl = imgUrl;
         }
