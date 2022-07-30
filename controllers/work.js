@@ -4,8 +4,10 @@ const utils = require("../utils/util");
 
 // Controller khi get vào index
 exports.getIndex = (req, res, next) => {
-  const user = req.session.userId;
-
+    if (req.session) {
+      return res.redirect('/start');
+    }
+    
     return res.render("index", {
       pageTitle: "Workers App",
       path: "/",

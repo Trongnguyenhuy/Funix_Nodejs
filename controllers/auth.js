@@ -28,7 +28,7 @@ exports.postLogin = (req, res, next) => {
               req.session.admin = admin;
             })
             .then(result => {
-              return res.redirect("/information");
+              return res.redirect("/start");
             })
             .catch((err) => {
               console.log(err);
