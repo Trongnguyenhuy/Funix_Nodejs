@@ -23,7 +23,7 @@
                                 </div>
                                 <div class="col-sm-8">
                                     <p><b>Type: </b> <%= vaccination.first.vaccineType %></p>
-                                    <p><b>Date: </b> <%= vaccination.first.dateInject.toLocaleString() %></p>
+                                    <p><b>Date: </b> <%= vaccination.first.dateInject %></p>
                                 </div>
                             </div>
                             <div class="row">
@@ -32,7 +32,7 @@
                                 </div>
                                 <div class="col-sm-8">
                                     <p><b>Type: </b> <%= vaccination.second.vaccineType %></p>
-                                    <p><b>Date: </b> <%= vaccination.second.dateInject.toLocaleString() %></p>
+                                    <p><b>Date: </b> <%= vaccination.second.dateInject %></p>
                                 </div>
                             </div>
                         <% } else { %>
