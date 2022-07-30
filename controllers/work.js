@@ -67,6 +67,7 @@ exports.getStart = (req, res, next) => {
 
 // Controller xử lý khi bắt đầu điểm danh, lưu phiên làm việc vào database, end time để trống
 exports.postStart = (req, res, next) => {
+  console.log(req.body);
   const workPlace = req.body.workPlace;
   const start = new Date();
   const workerId = req.session.userId;
