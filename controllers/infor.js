@@ -33,7 +33,7 @@ exports.getEditInformation = (req, res, next) => {
         path: "/information",
         pageTitle: user.name + ' Edit Information',
         worker: user,
-        doB: utils.getFullDate(user.doB),
+        doB: user.doB,
         isAuthenticated: req.session.isLogedIn,
         isAdmin: req.session.userAdmin,
       });
