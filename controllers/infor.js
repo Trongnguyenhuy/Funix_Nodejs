@@ -31,11 +31,13 @@ exports.getEditInformation = (req, res, next) => {
 
   User.findById(workerId)
     .then((user) => {
+      let doB = new Date(user.doB);
+
       return res.render("Infor/edit-infor", {
         path: "/information",
         pageTitle: user.name + ' Edit Information',
         worker: user,
-        doB: user.doB,
+        doB: doB.toLocaleString('en-GB', { timeZone: 'Asia/Ho_Chi_Minh'}).split(', ' )[0],
         isAuthenticated: req.session.isLogedIn,
         isAdmin: req.session.userAdmin,
       });
