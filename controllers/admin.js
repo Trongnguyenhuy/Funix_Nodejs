@@ -31,15 +31,17 @@ exports.getAddUser = (req, res, next) => {
 // Controller xử lý khi post dữ liệu từ trang add user và tiến hành lưu vào database
 exports.postAddUser = (req, res, next) => {
   const name = req.body.employee;
-  const doB = req.body.doB;
   const salaryScale = req.body.salaryScale;
   const department = req.body.department;
   const annualLeave = req.body.annualLeave;
   const img = req.file;
+  
+  let doB = req.body.doB;
+  doB = new Date(doB);
 
   const user = new User({
     name: name,
-    doB: doB,
+    doB: doB.toISOString(),
     salaryScale: salaryScale,
     department: department,
     annualLeave: annualLeave,

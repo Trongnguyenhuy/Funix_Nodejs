@@ -9,10 +9,12 @@ exports.getInformation = (req, res, next) => {
 
   User.findById(workerId)
     .then((user) => {
+      let doB = new Date(user.doB);
+
       return res.render("Infor/infor", {
         path: "/information",
         pageTitle: user.name,
-        doB: user.doB,
+        doB: doB.toLocaleString('en-GB', { timeZone: 'Asia/Ho_Chi_Minh'}),
         worker: user,
         isAuthenticated: req.session.isLogedIn,
         isAdmin: req.session.userAdmin,
