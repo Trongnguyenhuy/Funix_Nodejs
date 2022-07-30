@@ -5,12 +5,12 @@ const utils = require("../utils/util");
 // Controller khi get vào index
 exports.getIndex = (req, res, next) => {
   const user = req.session.userId;
-  
+
     return res.render("index", {
       pageTitle: "Workers App",
       path: "/",
-      isAuthenticated: false,
-      isAdmin: false,
+      isAuthenticated: req.session ? req.session.isLogedIn: false,
+      isAdmin: req.session ? req.session.userAdmin : false,
     });
 };
 
