@@ -16,7 +16,7 @@ const progressRoutes = require('./routes/progress');
 const uploadFile = require('./middleware/uploadFile');
 
 
-const MONGODB_URI = "mongodb+srv://nguyenhuytrong:yf1PGyescm7705cF@cluster0.boagr.mongodb.net/test";
+const MONGODB_URI = "mongodb+srv://nguyenhuytrong:yf1PGyescm7705cF@cluster0.boagr.mongodb.net/funix";
 
 const app = express();
 const store = MongoDbStore({
