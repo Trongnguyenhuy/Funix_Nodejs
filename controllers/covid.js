@@ -169,7 +169,7 @@ exports.postVaccination = (req, res, next) => {
             },
           }
         });
-        return res.render("covid/Vaccination", {
+        return res.render("covid/vaccination", {
           path: "/covid",
           pageTitle: "Vaccination",
           isAuthenticated: req.session.isLogedIn,
