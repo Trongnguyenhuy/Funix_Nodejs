@@ -5,16 +5,13 @@ const utils = require("../utils/util");
 // Controller khi get vào index
 exports.getIndex = (req, res, next) => {
   const user = req.session.userId;
-  if (user === undefined) {
+  
     return res.render("index", {
       pageTitle: "Workers App",
       path: "/",
       isAuthenticated: false,
       isAdmin: false,
     });
-  } else {
-    return res.redirect("/information");
-  }
 };
 
 // Controller khi get vào trang điểm danh
