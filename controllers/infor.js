@@ -14,7 +14,7 @@ exports.getInformation = (req, res, next) => {
       return res.render("Infor/infor", {
         path: "/information",
         pageTitle: user.name,
-        doB: doB.toLocaleString('en-GB', { timeZone: 'Asia/Ho_Chi_Minh'}),
+        doB: doB.toLocaleString('en-GB', { timeZone: 'Asia/Ho_Chi_Minh'}).split(', ' )[0],
         worker: user,
         isAuthenticated: req.session.isLogedIn,
         isAdmin: req.session.userAdmin,
