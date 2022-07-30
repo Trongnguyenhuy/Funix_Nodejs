@@ -83,7 +83,7 @@ exports.postStart = (req, res, next) => {
         start: start.toISOString(),
         end: null,
         confirm: false,
-        Day: start.toLocaleString().split(', ')[1],
+        Day: start.toISOString().split(', ')[0],
       });
 
       imgUrl = user.imgUrl;
