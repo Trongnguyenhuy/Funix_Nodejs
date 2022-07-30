@@ -11,7 +11,7 @@ exports.getInformation = (req, res, next) => {
     .then((user) => {
       return res.render("infor/infor", {
         path: "/information",
-        pageTitle: user.name +  " Information",
+        pageTitle: user.name,
         doB: user.doB,
         worker: user,
         isAuthenticated: req.session.isLogedIn,

@@ -22,6 +22,8 @@ exports.postLogin = (req, res, next) => {
           req.session.isLogedIn = true;
           req.session.userId = user._id;
           req.session.userAdmin = user.admin;
+          req.session.userName = user.name;
+          req.session.userImg = user.imgUrl;
 
           return User.findOne({ admin: true })
             .then(admin => {
