@@ -13,6 +13,7 @@ exports.getLogin = (req, res, next) => {
 exports.postLogin = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
+
   User.findOne({ email: email })
     .then((user) => {
       if (user) {
@@ -27,7 +28,7 @@ exports.postLogin = (req, res, next) => {
               req.session.admin = admin;
             })
             .then(result => {
-              return res.redirect("/");
+              return res.redirect("/information");
             })
             .catch((err) => {
               console.log(err);
