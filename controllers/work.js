@@ -158,7 +158,7 @@ exports.getEnd = (req, res, next) => {
 
       // Mảng lưu các lần đăng nhập hôm nay
       let progress = results.filter((work) => {
-        return work.Day === d.toLocaleString().split(', ')[1];
+        return work.Day === d.toISOString().split('T')[0];
       });
 
       let totalWorking = 0;
