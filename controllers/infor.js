@@ -29,7 +29,7 @@ exports.getEditInformation = (req, res, next) => {
 
   User.findById(workerId)
     .then((user) => {
-      return res.render("infor/edit-infor", {
+      return res.render("Infor/edit-infor", {
         path: "/information",
         pageTitle: user.name + ' Edit Information',
         worker: user,
