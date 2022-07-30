@@ -81,7 +81,7 @@ exports.getVaccination = (req, res, next) => {
 
   User.findById(workerId)
     .then((user) => {
-      return res.render("covid/Vaccination", {
+      return res.render("covid/vaccination", {
         path: "/covid",
         pageTitle: "Vaccination",
         isAuthenticated: req.session.isLogedIn,
