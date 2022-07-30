@@ -7,7 +7,7 @@ const fileHelper = require("../utils/fileHelper");
 exports.getInformation = (req, res, next) => {
   const workerId = req.session.userId;
 
-  User.findById(workerId)
+  return User.findById(workerId)
     .then((user) => {
       return res.render("infor/infor", {
         path: "/information",
