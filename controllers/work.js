@@ -67,13 +67,14 @@ exports.getStart = (req, res, next) => {
 
 // Controller xử lý khi bắt đầu điểm danh, lưu phiên làm việc vào database, end time để trống
 exports.postStart = (req, res, next) => {
-  console.log(req.body);
   const workPlace = req.body.workPlace;
-  const start = new Date();
   const workerId = req.session.userId;
   let imgUrl = "";
   let workerName = "";
   let admin = false;
+
+  let start = new Date();
+
   // tìm phiên làm việc theo id và kết thúc nó
   User.findById(workerId)
     .then((user) => {
@@ -83,7 +84,7 @@ exports.postStart = (req, res, next) => {
         start: start.toISOString(),
         end: null,
         confirm: false,
-        Day: start.toISOString().split('T')[0],
+        Day: start.toLocaleString('en-GB', { timeZone: 'Asia/Ho_Chi_Minh' }).split(', ')[0],
       });
 
       imgUrl = user.imgUrl;
@@ -98,7 +99,7 @@ exports.postStart = (req, res, next) => {
         pageTitle: "Working...",
         disabled: true,
         workerName: workerName,
-        start: start,
+        start: start.toLocaleString('en-GB', { timeZone: 'Asia/Ho_Chi_Minh'}),
         workPlace: workPlace,
         status: "Working...",
         workId: work._id,
@@ -127,12 +128,17 @@ exports.postEnd = (req, res, next) => {
       } else {
         // nếu chưa kết thúc thì end tại thời điểm hiện tại
         // vì có thể làm thêm giờ nên không nhất thiết end ở 17h
+        let start = new Date(work.start);
+
         work.end = d.toISOString();
-        work.totalSessionTime = utils.totalTime(work.start, work.end, "H");
+        work.totalSessionTime = utils.totalTime(start, d, "H");
+
         return work.save();
       }
     })
     .then((work) => {
+      console.log(work);
+
       const url = "/end/" + work.userId;
       return res.redirect(url);
     })
@@ -159,7 +165,7 @@ exports.getEnd = (req, res, next) => {
 
       // Mảng lưu các lần đăng nhập hôm nay
       let progress = results.filter((work) => {
-        return work.Day === d.toISOString().split('T')[0];
+        return work.Day === d.toLocaleString('en-GB', { timeZone: 'Asia/Ho_Chi_Minh'}).split(', ')[0];
       });
 
       let totalWorking = 0;
@@ -185,8 +191,8 @@ exports.getEnd = (req, res, next) => {
         pageTitle: "Resting...",
         path: "/checking",
         workerName: results[lastSession].userId.name,
-        start: lastStartTime,
-        end: lastEndTime,
+        start: lastStartTime.toLocaleString('en-GB', { timeZone: 'Asia/Ho_Chi_Minh'}),
+        end: lastEndTime.toLocaleString('en-GB', { timeZone: 'Asia/Ho_Chi_Minh'}),
         total: totalWorking,
         status: "Resting...",
         progress: progress,

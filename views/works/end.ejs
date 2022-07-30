@@ -29,8 +29,8 @@
                             <li class="list-group-item border-info text-info mt-1">
                                 <p><b>Session <%= i + 1 %>:</b></p>
                                 <hr>
-                                <p><i class="fa fa-hourglass-start" aria-hidden="true"></i> Start Time: <%= work.Start.toLocaleString() %></p>
-                                <p><i class="fa fa-hourglass-end" aria-hidden="true"></i> End Time: <%= work.End.toLocaleString() %></p>
+                                <p><i class="fa fa-hourglass-start" aria-hidden="true"></i> Start Time: <%= work.Start.toLocaleString('en-GB', { timeZone: 'Asia/Ho_Chi_Minh'}) %></p>
+                                <p><i class="fa fa-hourglass-end" aria-hidden="true"></i> End Time: <%= work.End.toLocaleString('en-GB', { timeZone: 'Asia/Ho_Chi_Minh'}) %></p>
                                 <p><i class="fa fa-map-marker" aria-hidden="true"></i> Work Place: <%= work.WorkPlace %></p>
                                 <p><i class="fa fa-clock-o" aria-hidden="true"></i> Session Time: <%= work.TotalSessionTime %> Hours</p>
                             </li>
