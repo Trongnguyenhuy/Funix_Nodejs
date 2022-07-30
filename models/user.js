@@ -19,7 +19,7 @@ const userSchema = new Schema({
   },
   admin: Boolean,
   doB: {
-    type: Date,
+    type: String,
     required: true,
   },
   salaryScale: {
