@@ -64,8 +64,8 @@
                                             <ul class="list-group col-sm-12 mx-2">
                                                 <div class="row mb-2">
                                                     <div class="col-sm-6">
-                                                        <li class="list-group-item"><p><b>Start:</b> <%= work.start.toLocaleString() %></p></li>
-                                                        <li class="list-group-item"><p><b>End:</b> <%= work.end ? work.end.toLocaleString() : '--:--'%></p></li>
+                                                        <li class="list-group-item"><p><b>Start:</b> <%= work.start.toLocaleString('en-GB', { timeZone: 'Asia/Ho_Chi_Minh'}) %></p></li>
+                                                        <li class="list-group-item"><p><b>End:</b> <%= work.end ? work.end.toLocaleString('en-GB', { timeZone: 'Asia/Ho_Chi_Minh'}) : '--:--'%></p></li>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <li class="list-group-item"><p><b>Work Place:</b> <%= work.workPlace %></p></li>
