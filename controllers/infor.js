@@ -9,7 +9,7 @@ exports.getInformation = (req, res, next) => {
 
   User.findById(workerId)
     .then((user) => {
-      return res.render("infor/infor", {
+      return res.render("infor/infor2", {
         path: "/information",
         pageTitle: user.name,
         doB: user.doB,
