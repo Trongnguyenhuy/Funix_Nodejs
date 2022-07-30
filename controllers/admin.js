@@ -15,7 +15,7 @@ exports.getAddUser = (req, res, next) => {
 
   User.findById(userId)
     .then((user) => {
-      return res.render("admin/add-user", {
+      return res.render("admin/add-User", {
         path: "/admin/add-user",
         pageTitle: "Add User",
         isAdmin: req.session.userAdmin,

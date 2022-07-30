@@ -52,7 +52,7 @@ exports.postEditInformation = (req, res, next) => {
   User.findById(workerId)
     .then((user) => {
       
-        if(img){
+      if(img){
           fileHelper.deleteFile(user.imgUrl);
           const imgUrl = img.path;
           user.imgUrl = imgUrl;
@@ -60,7 +60,6 @@ exports.postEditInformation = (req, res, next) => {
 
         return user.save();
     }).then(result => {
-      
         res.redirect('/information');
     })
     .catch((err) => {
