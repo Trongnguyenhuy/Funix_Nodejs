@@ -1,0 +1,60 @@
+<%- include('../includes/head.ejs') %>
+<%- include('../includes/navigation.ejs') %>
+    <div class="container-fluid">
+        <div class="row">
+                <div class="col-6 offset-3 mt-2">
+                    <% if (status === 'Working...') { %> 
+                        <div class="card border-info text-info mb-3">
+                            <div class="card-header row">
+                                <div class="col-sm-3">
+                                    <img class="card-img-top" src="/<%= workerImg %>" alt="<%= workerName %>">
+                                </div>
+                                <div class="col-sm-9">
+                                    <h2><%= workerName %> </h2>
+                                    <p><i class="fa fa-circle text-success" aria-hidden="true"></i> <%= status %></p>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text"><b><i class="fa fa-hourglass-start" aria-hidden="true"></i> Start Time:</b> <%= start %></p>
+                                <p class="card-text"><b><i class="fa fa-hourglass-end fa-spin fa-fw"></i> End Time:</b> Still working...</p>
+                                <p class="card-text"><b><i class="fa fa-map-marker" aria-hidden="true"></i> Work Place:</b> <%= workPlace %></p>
+                                <form action="/end/<%= workId %>" method="post">
+                                    <div class="btn-group btn-group-lg offset-4" role="group" aria-label="Basic example">
+                                        <button type="submit" class="btn btn-primary" disabled><i class="fa fa-play text-success" aria-hidden="true"></i> Start</button>
+                                        <button class="btn btn-secondary" type="submit"><i class="fa fa-stop text-danger" aria-hidden="true"></i> End</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    <% } else { %>
+                    <div class="card  border-info text-info mb-3">
+                        <div class="card-header row">
+                            <div class="col-sm-3">
+                                <img class="card-img-top" src="/<%= workerImg %>" alt="<%= workerName %>">
+                            </div>
+                            <div class="col-sm-9">
+                                <h2><%= workerName %> </h2>
+                                <p><i class="fa fa-circle text-danger" aria-hidden="true"></i> <%= status %></p>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <form action="/start" method="post">
+                                <div class="form-group <%= status === 'Resting...' ? '' : 'd-none' %>">
+                                    <label for="workplace"><b><i class="fa fa-map-marker" aria-hidden="true"></i> Choose workplace:</b></label>
+                                    <select class="form-control" name="workPlace" id="workPlace">
+                                        <option value="Company">Company</option>
+                                        <option value="Home">Home</option>
+                                        <option value="Guest">Guest</option>
+                                    </select>
+                                </div>
+                                <div class="btn-group btn-group-lg offset-4" role="group" aria-label="Basic example">
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-play text-success" aria-hidden="true"></i> Start</button>
+                                    <button formaction="/end" class="btn btn-secondary" type="submit" disabled><i class="fa fa-stop text-danger" aria-hidden="true"></i> End</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <% } %>
+                </div>
+        </div>
+<%- include('../includes/end.ejs') %>

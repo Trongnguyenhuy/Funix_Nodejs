@@ -1,0 +1,101 @@
+<%- include('../includes/head.ejs') %>
+<%- include('../includes/navigation.ejs') %>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-6 offset-3 mt-3">
+                <div class="card border-info text-info mb-3">
+                    <div class="card-header row">
+                        <div class="col-sm-3">
+                            <img class="card-img-top" src="/<%= workerImg %>" alt="<%= workerName %>">
+                        </div>
+                        <div class="col-sm-9">
+                            <h2><%= workerName %> </h2>
+                            <p><i class="fa fa-id-card" aria-hidden="true"></i> Worker Id: <%= workerId %> </p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <% if(vaccination) { %>
+                            <h3>Your Input Success !</h3>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-4 d-flex align-items-center">
+                                    <h5>First</h5>
+                                </div>
+                                <div class="col-sm-8">
+                                    <p><b>Type: </b> <%= vaccination.first.vaccineType %></p>
+                                    <p><b>Date: </b> <%= vaccination.first.dateInject.toLocaleString() %></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4 d-flex align-items-center">
+                                    <h5>Second</h5>
+                                </div>
+                                <div class="col-sm-8">
+                                    <p><b>Type: </b> <%= vaccination.second.vaccineType %></p>
+                                    <p><b>Date: </b> <%= vaccination.second.dateInject.toLocaleString() %></p>
+                                </div>
+                            </div>
+                        <% } else { %>
+                            <h3>Vaccination</h3>
+                            <hr>
+                            <form action="/covid/vaccination" method="post">
+                                <div class="row">
+                                    <div class="col-sm-4 d-flex align-items-center">
+                                        <h3>First</h3>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <div class="form-group row">
+                                            <label for="type1" class="col-sm-4 col-form-label">Type:</label>
+                                            <div class="col-sm-8">
+                                                <select class="form-control" name="type1" id="type1">
+                                                    <option value="AstraZeneca">AstraZeneca</option>
+                                                    <option value="VeroCell">Vero Cell</option>
+                                                    <option value="Pfizer">Pfizer</option>
+                                                    <option value="Moderna">Moderna</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="date1" class="col-sm-4 col-form-label">Date:</label>
+                                            <div class="col-sm-8">
+                                                <input class="form-control" type="date" name="date1" id="date1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-4 d-flex align-items-center">
+                                        <h3>Second</h3>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <div class="form-group row">
+                                            <label for="type2" class="col-sm-4 col-form-label">Type:</label>
+                                            <div class="col-sm-8">
+                                                <select class="form-control" name="type2" id="type2">
+                                                    <option value="AstraZeneca">AstraZeneca</option>
+                                                    <option value="VeroCell">Vero Cell</option>
+                                                    <option value="Pfizer">Pfizer</option>
+                                                    <option value="Moderna">Moderna</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="date2" class="col-sm-4 col-form-label">Date:</label>
+                                            <div class="col-sm-8">
+                                                <input class="form-control" type="date" name="date2" id="date2"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">
+                                    <button type="submit" class="btn btn-success">
+                                        Submit
+                                    </button>
+                                </div>
+                            </form>
+                        <% } %>
+                </div>
+            </div>
+        </div>
+<%- include('../includes/end.ejs') %>

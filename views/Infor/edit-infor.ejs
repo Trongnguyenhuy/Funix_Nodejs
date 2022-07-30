@@ -1,0 +1,44 @@
+<%- include('../includes/head.ejs') %>
+<%- include('../includes/navigation.ejs') %>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6 offset-3 mt-3">
+                <div class="card  border-info text-info mb-3">
+                    <div class="card-header row">
+                        <div class="col-sm-3">
+                            <img class="card-img-top" src="/<%= worker.imgUrl %>" alt="<%= worker.name %>">
+                        </div>
+                        <div class="col-sm-9">
+                            <h2><%= worker.name %> </h2>
+                            <p><i class="fa fa-id-card" aria-hidden="true"></i> Worker Id: <%= worker._id %> </p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group text-dark">
+                            <li class="list-group-item"><b><i class="fa fa-calendar" aria-hidden="true"></i> Date of Birth: </b><%= doB %></li>
+                            <li class="list-group-item"><b><i class="fa fa-balance-scale" aria-hidden="true"></i> Salary Scale: </b><%= worker.salaryScale %></li>
+                            <li class="list-group-item"><b><i class="fa fa-users" aria-hidden="true"></i> Department: </b><%= worker.department %></li>
+                            <li class="list-group-item"><b><i class="fa fa-sun-o" aria-hidden="true"></i> Annual Leaves: </b><%= worker.annualLeave %> Day</li>
+                            <li class="list-group-item">
+                                <div class="mt-2">
+                                    <form action="/information/edit-infor/<%= worker._id %>" method="POST" enctype="multipart/form-data">
+                                        <div class="form-row align-items-center">
+                                            <div class="col-auto">
+                                                <label for="imgUrl"><b><i class="fa fa-picture-o" aria-hidden="true"></i> Img URL:</b></label>
+                                                <input type="file" name="image" id="image">
+                                            </div>
+                                            <div class="col-auto">
+                                                <button class='btn btn-primary' type="submit">
+                                                    <i class="fa fa-check" aria-hidden="true"></i> Change
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+<%- include('../includes/end.ejs') %>

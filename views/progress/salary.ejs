@@ -1,0 +1,80 @@
+<%- include('../includes/head.ejs') %>
+<%- include('../includes/navigation.ejs') %>
+<div class="container-fluid">
+    <div class="row mt-4 ">
+        <div class="col-sm-2 my-2">
+            <div class="card  border-info text-info mb-3">
+                <div class="card-header container">
+                    <div class="row">
+                        <img class="card-img-top" src="/<%= workerImg %>" alt="<%= workerName %>">
+                    </div>
+                    <hr>
+                    <div class="row text-center">
+                        <h2><%= workerName %> </h2>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        <b># Admin Name: <%= adminName %></b>
+                    </p>
+                    <p class="card-text">
+                        <b># Admin Id: <%= adminId %></b>
+                    </p>
+                </div>
+            </div>
+            <ul class="list-group my-2">
+                <li class="list-group-item">
+                    <a href="<%= isAdmin ? '/admin/progress-manager/'+ workerId : '/progress'%>"><i class="fa fa-step-forward" aria-hidden="true"></i> Progress</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="/salary/<%= workerId %>"><i class="fa fa-money" aria-hidden="true"> </i> Salary</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-7 text-dark my-2">
+            <div class="card">
+                <div class="card-header container">
+                    <h2>Salary:</h2>
+                </div>
+                <div class="card-body">
+                    <p class="card-text"><b><i class="fa fa-check" aria-hidden="true"></i> Total OverTime:</b> <i><%=totalOverTime%></i> Hours</p>
+                    <p class="card-text"><b><i class="fa fa-check" aria-hidden="true"></i> Total Incomplete:</b> <i><%=totalIncomplete%></i> Hours</p>
+                    <hr>
+                    <p class="card-text">
+                        <b><i class="fa fa-hand-o-right" aria-hidden="true"></i> Salary:</b> <i><%=salary%></i> VND
+                        for <%= month %>/2022
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 text-info my-2">
+            <ul class="list-group text-info">
+                <li class="list-group-item">
+                    <form action="/salary/<%= workerId %>" method="post">
+                        <div class="form-group">
+                            <label for="month"><h4>Choose Month:</h4></label>
+                            <select name="month" id="month" class="form-control">
+                                <option value="1">Jan</option>
+                                <option value="2">Feb</option>
+                                <option value="3">Mar</option>
+                                <option value="4">Apr</option>
+                                <option value="5">May</option>
+                                <option value="6">Jun</option>
+                                <option value="7">Jul</option>
+                                <option value="8">Aug</option>
+                                <option value="9">Sep</option>
+                                <option value="10">Oct</option>
+                                <option value="11">Nov</option>
+                                <option value="12">Dec</option>
+                            </select>
+                            <div class="my-2">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<%- include('../includes/end.ejs') %>

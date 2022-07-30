@@ -1,0 +1,240 @@
+<%- include('../includes/head.ejs') %>
+<%- include('../includes/navigation.ejs') %>
+    <div class="container-fluid">
+        <div class="row mt-4 ">
+            <div class="col-sm-2 my-2">
+                <div class="card  border-info text-info mb-3">
+                    <div class="card-header container">
+                        <div class="row">
+                            <img class="card-img-top" src="/<%= workerImg %>" alt="<%= pageTitle %>">
+                        </div>
+                        <hr>
+                        <div class="row text-center">
+                            <h2><%= workerName %> </h2>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            <b># Admin Name: <%= adminName %></b>
+                        </p>
+                        <p class="card-text">
+                            <b># Admin Id: <%= adminId %></b>
+                        </p>
+                    </div>
+                </div>
+                <ul class="list-group my-2">
+                    <li class="list-group-item">
+                        <a href="<%= isAdmin ? '/admin/progress-manager/'+ workerId : '/progress'%>"><i class="fa fa-step-forward" aria-hidden="true"></i> Progress</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="/salary/<%= workerId %>"><i class="fa fa-money" aria-hidden="true"> </i> Salary</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-7 text-dark mb-2">
+                <ul class="list-group list-group-flush">
+                    <% if(!sort) { %>
+                        <% result.forEach(works => { %>
+                            <li class="list-group-item my-2">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <h2><b>Day:</b> <%= works.Day %></h2>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <p><b>Working Time:</b> <%= works.totalTime %> Hours </p>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <p><b>DateLeave:</b> <%= works.hoursLeave %> Hours</p>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <p><b>Over Time:</b> <%= works.overTime %> Hours</p>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <p><b>Incomplete Time:</b> <%= works.incomplete %> Hours</p>
+                                    </div>
+                                </div>
+                                <hr>
+                                <% works.sessions.forEach((work,i) => { %>
+                                        <div class="row my-2 border border-secondary">
+                                            <div class="col-sm-12">
+                                                <h3>Session <%= i+1 %>:</h3>
+                                                <p><b>Session Time:</b> <%= work.end ? work.totalSessionTime + ' Hours' : 'Still Working'  %></p>
+                                                <hr>
+                                            </div>
+                                            <ul class="list-group col-sm-12 mx-2">
+                                                <div class="row mb-2">
+                                                    <div class="col-sm-6">
+                                                        <li class="list-group-item"><p><b>Start:</b> <%= work.start.toLocaleString() %></p></li>
+                                                        <li class="list-group-item"><p><b>End:</b> <%= work.end ? work.end.toLocaleString() : '--:--'%></p></li>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <li class="list-group-item"><p><b>Work Place:</b> <%= work.workPlace %></p></li>
+                                                    </div>
+                                                </div>
+                                            </ul>
+                                            <% if(isAdmin) { %>
+                                                <div class="col-sm-12 my-2">
+                                                    <a  href="/admin/confirm/<%= work.userId._id %>?confirmId=<%= work._id %>" class="btn btn-primary <%= work.confirm ? 'disabled' : '' %>" ><i class="fa fa-check" aria-hidden="true"> Confirm</i></a>
+                                                    <a href="/admin/delete/<%= work.userId._id %>?deleteId=<%= work._id %>&confirm=<%= work.confirm %>" class="btn btn-danger <%= work.confirm ? 'disabled' : '' %>"><i class="fa fa-trash" aria-hidden="true"> Delete</i></a>
+                                                </div>
+                                            <% } %>
+                                        </div>
+                                    <% }); %>
+                                </li>
+                        <% }); %>
+                    <% } else { %>
+                        <% works.forEach((work,i) => { %>
+                            <li class="list-group-item my-2">
+                                <div class="row my-2 border border-secondary">
+                                    <div class="col-sm-12">
+                                        <h3>Session Day <%= work.Day  %></h3>
+                                        <p><b>Session Time:</b> <%= work.end ? work.totalSessionTime + ' Hours' : 'Still Working'  %></p>
+                                        <hr>
+                                    </div>
+                                    <ul class="list-group col-sm-12 mx-2">
+                                        <div class="row mb-2">
+                                            <div class="col-sm-6">
+                                                <li class="list-group-item"><p><b>Start:</b> <%= work.start.toLocaleString() %></p></li>
+                                                <li class="list-group-item"><p><b>End:</b> <%= work.end ? work.end.toLocaleString() : '--:--'%></p></li>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <li class="list-group-item"><p><b>Work Place:</b> <%= work.workPlace %></p></li>
+                                            </div>
+                                        </div>
+                                    </ul>
+                                    <% if(isAdmin) { %>
+                                        <div class="col-sm-12 my-2">
+                                            <a  href="/admin/confirm/<%= work.userId._id %>?confirmId=<%= work.id %>" class="btn btn-primary <%= work.confirm ? 'disabled' : '' %>" ><i class="fa fa-check" aria-hidden="true"> Confirm</i></a>
+                                            <a href="/admin/delete/<%= work.userId._id %>?deleteId=<%= work.id %>&confirm=<%= work.confirm %>" class="btn btn-danger <%= work.confirm ? 'disabled' : '' %>"><i class="fa fa-trash" aria-hidden="true"> Delete</i></a>
+                                        </div>
+                                    <% } %>
+                                </div>
+                            </li>
+                        <% }); %>
+                    <% } %>
+                </ul>
+                <nav aria-label="Page navigation example">
+                    <div class="col offset-3">
+                        <ul class="pagination">
+                            <% if (hasPrevPage) { %>
+                                <li class="page-item">
+                                    <a class="page-link" href="?page=<%= prevPage %><%=sort || search ? '&field=' + field : ''%>">Previous</a>
+                                </li>
+                            <% } %>
+                            <% if (currentPage !== 1 && prevPage !== 1) { %>
+                                <li class="page-item">
+                                    <a class="page-link" href="?page=1<%=sort || search ? '&field=' + field : ''%>">1</a>
+                                </li>
+                            <% } %>
+                            <li class="page-item">
+                                <a class="page-link" href="?page=<%= currentPage %><%=sort || search ? '&field=' + field : ''%>"><%= currentPage %></a>
+                            </li>
+                            <% if (hasNextPage) { %>
+                                <li class="page-item">
+                                    <a class="page-link" href="?page=<%= nextPage %><%=sort || search ? '&field=' + field : ''%>">Next</a>
+                                </li>
+                            <% } %>
+                        </ul>
+                    </div>
+                  </nav>
+            </div>
+            <div class="col-sm-3 text-info my-2">
+                <ul class="list-group text-info">
+                    <li class="list-group-item">
+                        <form action="/search/<%= workerId %>" method="post">
+                            <div class="form-group">
+                                <label for="search">Search Here:</label>
+                                <input type="text" name="search" id="search" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <select name="field" id="field" class="form-control">
+                                    <option value="DayTime">By Daytime</option>
+                                    <option value="workPlace">By Workplace</option>
+                                </select>
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-search" aria-hidden="true"></i> Search
+                                </button>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                    ?
+                                </button>
+                            </div>
+                        </form>
+                    </form>
+                    </li>
+                    <li class="list-group-item">
+                        <form action="/sort/<%= workerId %>" method="post">
+                            <div class="form-group">
+                                <label for="field">Field:</label>
+                                <select name="field" id="field" class="form-control">
+                                    <option value="DayTime">By Daytime</option>
+                                    <option value="workPlace">By Workplace</option>
+                                </select>
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-sort" aria-hidden="true"></i> Sort
+                                </button>
+                            </div>
+                        </form>
+                    </li>
+                    <% if(isAdmin) { %>
+                        <li class="list-group-item">
+                            <form action="/admin/admin-month-view/<%= workerId %>" method="post">
+                                <div class="form-group">
+                                    <label for="month"><h4>Choose Month:</h4></label>
+                                    <select name="month" id="month" class="form-control">
+                                        <option value="1">Jan</option>
+                                        <option value="2">Feb</option>
+                                        <option value="3">Mar</option>
+                                        <option value="4">Apr</option>
+                                        <option value="5">May</option>
+                                        <option value="6">Jun</option>
+                                        <option value="7">Jul</option>
+                                        <option value="8">Aug</option>
+                                        <option value="9">Sep</option>
+                                        <option value="10">Oct</option>
+                                        <option value="11">Nov</option>
+                                        <option value="12">Dec</option>
+                                    </select>
+                                    <div class="my-2">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </li>
+                    <% } %>
+                </ul>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content text-dark">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel">Hướng Dẫn Search</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h4>Dấu *:</h4>
+                    <p> Dấu sao có thể thay thế một hoặc một nhóm các kí tự trong chuỗi không kể chữ hay số(ở dạng Text)</p>
+                    <h4>Dấu ?:</h4>
+                    <p>Mỗi Dấu hỏi (?) sẽ thay thế một kí tự trong chuỗi tìm kiếm.</p>
+                    <h4>Cú pháp search:</h4>
+                    <p>
+                        * chỉ có thể ở đầu chuỗi và cuối chuỗi, hợp lệ: *#/#/#### hoặc ##/#/###* hay *ome hay hom*
+                        <br>
+                        ? chỉ có thể là các # giữa chuỗi #?/##/##### hay h?me 
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            </div>
+        </div>
+<%- include('../includes/end.ejs') %>

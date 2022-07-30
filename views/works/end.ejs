@@ -1,0 +1,41 @@
+<%- include('../includes/head.ejs') %>
+<%- include('../includes/navigation.ejs') %>
+    <div class="container-fluid">
+        <div class="row">
+                <div class="col-8 mt-2">
+                        <div class="card border-info text-info m-3">
+                            <div class="card-header row">
+                                <div class="col-sm-3">
+                                    <img class="card-img-top" src="/<%= workerImg %>" alt="<%= workerName %>">
+                                </div>
+                                <div class="col-sm-9">
+                                    <h2><%= workerName %> </h2>
+                                    <p><i class="fa fa-circle text-danger" aria-hidden="true"></i> <%= status %></p>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text"><i class="fa fa-hourglass-start" aria-hidden="true"></i> Last Start Time: <%= start %></p>
+                                <p class="card-text"><i class="fa fa-hourglass-end" aria-hidden="true"></i>  Last End Time: <%= end %></p>
+                                <p class="card-text"><i class="fa fa-clock-o" aria-hidden="true"></i>  Last session time: <%= total %> Hours</p>
+                                <a href="/start" class="btn btn-primary"><i class="fa fa-play text-success" aria-hidden="true"></i> Start Again</a>
+                            </div>
+                        </div>
+                </div>
+                <div class="col-4 mt-2">
+                    <h2>Work Checking Today:</h2>
+                    <hr>
+                    <ul class="list-group m-3">
+                        <% progress.forEach( (work,i) => { %>
+                            <li class="list-group-item border-info text-info mt-1">
+                                <p><b>Session <%= i + 1 %>:</b></p>
+                                <hr>
+                                <p><i class="fa fa-hourglass-start" aria-hidden="true"></i> Start Time: <%= work.Start.toLocaleString() %></p>
+                                <p><i class="fa fa-hourglass-end" aria-hidden="true"></i> End Time: <%= work.End.toLocaleString() %></p>
+                                <p><i class="fa fa-map-marker" aria-hidden="true"></i> Work Place: <%= work.WorkPlace %></p>
+                                <p><i class="fa fa-clock-o" aria-hidden="true"></i> Session Time: <%= work.TotalSessionTime %> Hours</p>
+                            </li>
+                        <% }); %>
+                    </ul>
+                </div>
+        </div>
+<%- include('../includes/end.ejs') %>

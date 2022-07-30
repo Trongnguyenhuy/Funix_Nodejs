@@ -1,0 +1,17 @@
+<%- include('../includes/head.ejs') %>
+<%- include('../includes/navigation.ejs') %>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="card-deck m-auto">
+            <% workers.forEach(worker => { %>
+                    <div class="card text-dark mt-2 " style="width: 18rem;">
+                        <img class="card-img-top" src="/<%= worker.imgUrl %>" alt="<%= worker.name %>">
+                        <div class="card-body">
+                        <h5 class="card-title"><%= worker.name %></h5>
+                        <a href="/admin/progress-manager/<%= worker._id %>" class="btn btn-success">Detail</a>
+                        </div>
+                    </div>
+                    <% }); %>
+            </div>
+        </div>
+<%- include('../includes/end.ejs') %>

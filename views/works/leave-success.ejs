@@ -1,0 +1,26 @@
+<%- include('../includes/head.ejs') %>
+<%- include('../includes/navigation.ejs') %>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-6 offset-3 mt-3">
+                <div class="card  border-info text-info mb-3">
+                    <div class="card-header row">
+                        <div class="col-sm-3">
+                            <img class="card-img-top" src="/<%= workerImg %>" alt="<%= workerName %>">
+                        </div>
+                        <div class="col-sm-9">
+                            <h2><%= workerName %> </h2>
+                            <p><b>Remain Annual Leave:</b> <%= remainAnnualLeave %> Day </p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                      <p class="card-text"><b>Start Day:</b> <%= startDay %></p>
+                      <p class="card-text"><b>End Day:</b> <%= endDay %></p>
+                      <p class="card-text"><b>Hours Leave:</b> <%= hoursLeave %> Hours</p>
+                      <p class="card-text"><b>Reason:</b> <%= reason %></p>
+                      <a href="/leave" class="btn btn-primary">Write Leave</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+<%- include('../includes/end.ejs') %>

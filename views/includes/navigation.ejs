@@ -1,0 +1,82 @@
+<!-- <div class="row">
+  <div class="col"> -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+  <a class="navbar-brand" href="/"><i class="fa fa-users fa-2x" aria-hidden="true"></i> Workers App</a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarNavAltMarkup"
+    aria-controls="navbarNavAltMarkup"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <% if( isAuthenticated ) { %>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle <%= path==='/checking' ? 'active' : '' %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-check-square-o" aria-hidden="true"></i> Checking
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/start"><i class="fa fa-hourglass-start" aria-hidden="true"></i> Start Working</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/leave"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Write Leave</a>
+        </div>
+      </li>
+      <li>
+        <a class="nav-item nav-link <%= path==='/information' ? 'active' : '' %>"" href="/information"><i class="fa fa-info" aria-hidden="true"></i> Infomation</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle <%= path==='/progress' ? 'active' : '' %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-suitcase" aria-hidden="true"></i> Working
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/progress"><i class="fa fa-step-forward" aria-hidden="true"></i> Progress</a>
+          <% if( isAdmin ) { %>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/admin/progress-manager"><i class="fa fa-list-alt" aria-hidden="true"></i> Progress Managerment</a>
+          <% } %>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle <%= path==='/covid' ? 'active' : '' %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-medkit" aria-hidden="true"></i> Covid
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/covid/temperature"><i class="fa fa-thermometer-empty" aria-hidden="true"></i> Body Temperature</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/covid/vaccination"><i class="fa fa-vine" aria-hidden="true"></i> Vaccination</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/covid/infection"><i class="fa fa-ambulance" aria-hidden="true"></i> Covid Infection</a>
+          <% if( isAdmin ) { %>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/admin/covid-manager"><i class="fa fa-list-alt" aria-hidden="true"></i> Covid Managerment</a>
+          <% } %>
+        </div>
+      </li>
+      <% if( isAdmin ) { %>
+        <li>
+          <a class="nav-item nav-link <%= path==='/admin/add-user' ? 'active' : '' %>" href="/admin/add-user"><i class="fa fa-address-card" aria-hidden="true"></i> Add User</a>
+        </li>
+      <% } %>
+    </ul>
+    <a class="btn btn-outline-primary"  href="/logout">
+      <i class="fa fa-sign-out" aria-hidden="true"></i> Logout
+    </a>
+    <% } else { %>
+    <div class="ml-auto">
+      <a class="btn btn-outline-primary <%= path==='/login' ? 'active' : '' %>" href="/login">
+        <i class="fa fa-sign-in" aria-hidden="true"></i> Login
+      </a>
+      <a class="btn btn-outline-primary ml-2 <%= path==='/signup' ? 'active' : '' %>" href="/signup">
+        <i class="fa fa-user-plus" aria-hidden="true"></i> Sign Up
+      </a>
+    </div>
+    <% } %>
+  </div>
+</nav>
+  <!-- </div>
+</div> -->

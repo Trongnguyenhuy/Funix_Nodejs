@@ -1,0 +1,46 @@
+<%- include('../includes/head.ejs') %>
+<%- include('../includes/navigation.ejs') %>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-6 offset-3 mt-3">
+                <div class="card border-info text-info mb-3">
+                    <div class="card-header row">
+                        <div class="col-sm-3">
+                            <img class="card-img-top" src="/<%= workerImg %>" alt="<%= workerName %>">
+                        </div>
+                        <div class="col-sm-9">
+                            <h2><%= workerName %> </h2>
+                            <p><i class="fa fa-id-card" aria-hidden="true"></i> Worker Id: <%= workerId %> </p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <% if(infection) { %>
+                            <h3>Your Input Success !</h3>
+                            <hr>
+                            <p><b>Find At: </b> <%= infection.howToFind %></p>
+                            <p><b>Date Find: </b> <%= infection.date.toLocaleString() %></p>
+                        <% } else { %>
+                            <h3>Infect Checkin</h3>
+                            <hr>
+                            <form action="/covid/infection" method="post">
+                                <div class="form-group">
+                                    <label for="date"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Date:</label>
+                                    <input class="form-control" type="date" name="date" id="date"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="howTofind"><i class="fa fa-map-marker" aria-hidden="true"></i> How to find:</label>
+                                    <select class="form-control" name="howToFind" id="howToFind">
+                                        <option value="Company">At Company</option>
+                                        <option value="Home">At Home</option>
+                                        <option value="Hospital">At Hospital</option>
+                                    </select>
+                                </div>
+                                <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">
+                                    <button type="submit" class="btn btn-success">Submit</button>
+                                </div>
+                            </form>
+                        <% } %>
+                    </div>
+            </div>
+        </div>
+<%- include('../includes/end.ejs') %>

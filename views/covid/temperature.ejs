@@ -1,0 +1,45 @@
+<%- include('../includes/head.ejs') %>
+<%- include('../includes/navigation.ejs') %>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-6 offset-3 mt-3">
+                <div class="card border-info text-info mb-3">
+                    <div class="card-header row">
+                        <div class="col-sm-3">
+                            <img class="card-img-top" src="/<%= workerImg %>" alt="<%= workerName %>">
+                        </div>
+                        <div class="col-sm-9">
+                            <h2><%= workerName %> </h2>
+                            <p><i class="fa fa-id-card" aria-hidden="true"></i> Worker Id: <%= workerId %> </p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <% if(temp) { %>
+                            <h3>Your Input Success !</h3>
+                            <hr>
+                            <p><b>Temperature: </b> <%= temp.temp %> <sup>o</sup>C</p>
+                            <p><b>Date Check: </b> <%= temp.dateAndTime.toLocaleString() %></p>
+                        <% } else { %>
+                            <h3>Body Temperature Checkin</h3>
+                            <hr>
+                            <form action="/covid/temperature" method="post">
+                                <div class="form-group">
+                                    <label for="temp"><i class="fa fa-thermometer-empty" aria-hidden="true"></i> Temperature:</label>
+                                    <input class="form-control" type="number" name="temp" id="temp" step="0.01"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="dateAndTime"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Date and Time:</label>
+                                    <input class="form-control" type="datetime-local" name="dateAndTime" id="dateAndTime"/>
+                                </div>
+                                <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">
+                                    <button type="submit" class="btn btn-success">
+                                        Submit
+                                    </button>
+                                </div>
+                            </form>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+<%- include('../includes/end.ejs') %>

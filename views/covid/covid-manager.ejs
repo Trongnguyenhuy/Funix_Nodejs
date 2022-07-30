@@ -1,0 +1,109 @@
+<%- include('../includes/head.ejs') %>
+<%- include('../includes/navigation.ejs') %>
+    <div class="container-fluid">
+        <div class="row">
+            <% users.forEach( (user,i) => {%>
+                <div class="col-sm-6">
+                    <div class="card border-info text-info my-3">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <img class="card-img-top" src="/<%= user.userId.imgUrl %>" alt="<%= user.userId.name %>">
+                                </div>
+                                <div class="col-sm-8">
+                                    <h2><%= user.userId.name %> </h2>
+                                    <p><i class="fa fa-id-card" aria-hidden="true"></i> Worker Id: <%= user.userId._id %> </p>
+                                    <a href="covid-manager/<%= user.userId._id %>" class="btn btn-success"><i class="fa fa-download" aria-hidden="true"></i> Report</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-2 d-flex align-items-center">
+                                  <div class="list-group" id="list-tab" role="tablist">
+                                    <a class="list-group-item list-group-item-action active" id="list-vaccine <%='-' + i %>-list" data-toggle="list" href="#list-vaccine<%='-' + i %>" role="tab" aria-controls="vaccine<%='-' + i %>">
+                                        <i class="fa fa-vine" aria-hidden="true"></i>
+                                    </a>
+                                    <a class="list-group-item list-group-item-action" id="list-temp<%='-' + i %>-list" data-toggle="list" href="#list-temp<%='-' + i %>" role="tab" aria-controls="temp<%='-' + i %>">
+                                        <i class="fa fa-thermometer-empty" aria-hidden="true"></i>
+                                    </a>
+                                    <a class="list-group-item list-group-item-action" id="list-infect<%='-' + i %>-list" data-toggle="list" href="#list-infect<%='-' + i %>" role="tab" aria-controls="infect<%='-' + i %>">
+                                        <i class="fa fa-ambulance" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                                </div>
+                                <div class="col-10">
+                                  <div class="tab-content" id="nav-tabContent">
+                                    <div class="tab-pane fade show active" id="list-vaccine<%='-' + i %>" role="tabpanel" aria-labelledby="list-vaccine<%='-' + i %>-list">
+                                        <h5>Vaccination</h5>
+                                        <hr>
+                                        <ul class="list-group">
+                                            <li class="list-group-item">
+                                                <h6><b>First:</b></h6>
+                                                <hr>
+                                                <p><b>Type:</b> <%= user.vaccination.length >= 1 ? user.vaccination[0].first.
+                                                    vaccineType : 'NaN' %>
+                                                </p>
+                                                <p><b>Date:</b> <%= user.vaccination.length >= 1 ? user.vaccination[0].first.
+                                                    dateInject.toLocaleString() : 'NaN' %>
+                                                </p>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <h6><b>Second:</b></h6>
+                                                <hr>
+                                                <p><b>Type:</b> <%= user.vaccination.length >= 1 ? user.vaccination[0].second.
+                                                    vaccineType : 'NaN' %>
+                                                </p>
+                                                <p><b>Date:</b> <%= user.vaccination.length >= 1 ? user.vaccination[0].second.
+                                                    dateInject.toLocaleString() : 'NaN' %>
+                                                </p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="tab-pane fade" id="list-temp<%='-' + i %>" role="tabpanel" aria-labelledby="list-temp<%='-' + i %>-list">
+                                        <h5>Temperature:</h5>
+                                        <hr>
+                                        <ul class="list-group">
+                                            <% if (user.temperature.length >= 1) { %>
+                                                <% user.temperature.forEach(item => { %>
+                                                    <li class="list-group-item">
+                                                        <p>Time: <%= item.dateAndTime.toLocaleString() %></p>
+                                                        <p>Temperature: <%= item.temp %><sup>o</sup>C</p>
+                                                    </li>
+                                                <% }); %>
+                                            <% } else { %>
+                                                <li class="list-group-item">
+                                                    <p>Time: NaN</p>
+                                                    <p>Temperature: NaN</p>
+                                                </li>
+                                            <% }; %>
+                                        </ul>
+                                    </div>
+                                    <div class="tab-pane fade" id="list-infect<%='-' + i %>" role="tabpanel" aria-labelledby="list-infect<%='-' + i %>-list">
+                                        <h5>Infection:</h5>
+                                        <hr>
+                                        <ul class="list-group">
+                                            <% if (user.infection.length >= 1) { %>
+                                                <% user.infection.forEach(item => { %>
+                                                    <li class="list-group-item">
+                                                        <p>Time: <%= item.date.toLocaleString() %></p>
+                                                        <p>Find at: <%= item.howToFind %></p>
+                                                    </li>
+                                                <% }); %>
+                                            <% } else { %>
+                                                <li class="list-group-item">
+                                                    <p>Time: NaN</p>
+                                                    <p>Find at: NaN</p>
+                                                </li>
+                                            <% } %>
+                                        </ul>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+<%- include('../includes/end.ejs') %>
