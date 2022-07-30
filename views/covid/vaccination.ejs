@@ -22,8 +22,8 @@
                                     <h5>First</h5>
                                 </div>
                                 <div class="col-sm-8">
-                                    <p><b>Type: </b> <%= vaccination.first.vaccineType %></p>
-                                    <p><b>Date: </b> <%= vaccination.first.dateInject %></p>
+                                    <p><b>Type: </b> <%= vaccination.first.type %></p>
+                                    <p><b>Date: </b> <%= vaccination.first.date.toLocaleString('en-GB', { timeZone: 'Asia/Ho_Chi_Minh'}).split(', ')[0] %></p>
                                 </div>
                             </div>
                             <div class="row">
@@ -31,8 +31,8 @@
                                     <h5>Second</h5>
                                 </div>
                                 <div class="col-sm-8">
-                                    <p><b>Type: </b> <%= vaccination.second.vaccineType %></p>
-                                    <p><b>Date: </b> <%= vaccination.second.dateInject %></p>
+                                    <p><b>Type: </b> <%= vaccination.second.type %></p>
+                                    <p><b>Date: </b> <%= vaccination.second.date.toLocaleString('en-GB', { timeZone: 'Asia/Ho_Chi_Minh'}).split(', ')[0] %></p>
                                 </div>
                             </div>
                         <% } else { %>

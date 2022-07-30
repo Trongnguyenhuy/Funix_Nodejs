@@ -26,8 +26,10 @@ exports.getTemperature = (req, res, next) => {
 // Controller xử lý khi post vào trang do nhiệt độ
 exports.postTemperature = (req, res, next) => {
   const temp = req.body.temp;
-  const dateAndTime = new Date(req.body.dateAndTime);
   const workerId = req.session.userId;
+  
+  let dateAndTime = req.body.dateAndTime;
+  dateAndTime = new Date(dateAndTime);
 
   Covid.findOne({ userId: workerId })
     .populate("userId")
@@ -58,7 +60,7 @@ exports.postTemperature = (req, res, next) => {
       return Covid.findOne({ userId: workerId }).populate("userId");
     })
     .then((covid) => {
-      const lastCheck = covid.temperature.length - 1;
+
       return res.render("covid/temperature", {
         path: "/covid",
         pageTitle: "Body Temperature",
@@ -67,7 +69,9 @@ exports.postTemperature = (req, res, next) => {
         workerName: covid.userId.name,
         workerId: workerId,
         workerImg: covid.userId.imgUrl,
-        temp: covid.temperature[lastCheck],
+        temperature: temp,
+        temp: covid,
+        dateAndTime: dateAndTime.toLocaleString('en-GB', { timeZone: 'Asia/Ho_Chi_Minh'})
       });
     })
     .catch((err) => {
@@ -151,6 +155,20 @@ exports.postVaccination = (req, res, next) => {
     })
     .then((covid) => {
       if(covid){
+        let vaccination = covid.vaccination;
+
+        vaccination = vaccination.map(item => {
+          return {
+            first: {
+              type: item.first.vaccineType,
+              date: new Date(item.first.dateInject)
+            },
+            second: {
+              type: item.second.vaccineType,
+              date: new Date(item.second.dateInject)
+            },
+          }
+        });
         return res.render("covid/Vaccination", {
           path: "/covid",
           pageTitle: "Vaccination",
@@ -159,7 +177,7 @@ exports.postVaccination = (req, res, next) => {
           workerName: covid.userId.name,
           workerId: workerId,
           workerImg: covid.userId.imgUrl,
-          vaccination: covid.vaccination[0],
+          vaccination: vaccination[0],
         });
       }
     })
@@ -199,8 +217,6 @@ exports.postInfection = (req, res, next) => {
       }
     })
     .then((covid) => {
-      const lastCheck = covid.infection.length - 1;
-
       return res.render("covid/infection", {
         path: "/covid",
         pageTitle: "Covid Infection",
@@ -209,7 +225,9 @@ exports.postInfection = (req, res, next) => {
         workerName: covid.userId.name,
         workerId: workerId,
         workerImg: covid.userId.imgUrl,
-        infection: covid.infection[lastCheck],
+        infection: covid,
+        howToFind: howToFind,
+        date: date.toLocaleString('en-GB', { timeZone: 'Asia/Ho_Chi_Minh'}).split(', ')[0]
       });
     })
     .catch((err) => {
