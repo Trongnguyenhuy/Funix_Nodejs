@@ -2,7 +2,6 @@ const User = require("../models/user");
 const utils = require("../utils/util");
 const fileHelper = require("../utils/fileHelper");
 
-
 // Controller xử lý khi get vào trang thông tin cá nhân
 exports.getInformation = (req, res, next) => {
   const workerId = req.session.userId;
@@ -14,7 +13,9 @@ exports.getInformation = (req, res, next) => {
       return res.render("Infor/infor", {
         path: "/information",
         pageTitle: user.name,
-        doB: doB.toLocaleString('en-GB', { timeZone: 'Asia/Ho_Chi_Minh'}).split(', ' )[0],
+        doB: doB
+          .toLocaleString("en-GB", { timeZone: "Asia/Ho_Chi_Minh" })
+          .split(", ")[0],
         worker: user,
         isAuthenticated: req.session.isLogedIn,
         isAdmin: req.session.userAdmin,
@@ -35,9 +36,11 @@ exports.getEditInformation = (req, res, next) => {
 
       return res.render("Infor/edit-infor", {
         path: "/information",
-        pageTitle: user.name + ' Edit Information',
+        pageTitle: user.name + " Edit Information",
         worker: user,
-        doB: doB.toLocaleString('en-GB', { timeZone: 'Asia/Ho_Chi_Minh'}).split(', ' )[0],
+        doB: doB
+          .toLocaleString("en-GB", { timeZone: "Asia/Ho_Chi_Minh" })
+          .split(", ")[0],
         isAuthenticated: req.session.isLogedIn,
         isAdmin: req.session.userAdmin,
       });
@@ -52,21 +55,20 @@ exports.postEditInformation = (req, res, next) => {
   const workerId = req.params.workerId;
   const img = req.file;
 
-
   User.findById(workerId)
     .then((user) => {
-      
-      if(img){
-          fileHelper.deleteFile(user.imgUrl);
-          const imgUrl = img.path;
-          user.imgUrl = imgUrl;
-        }
+      if (img) {
+        fileHelper.deleteFile(user.imgUrl);
+        const imgUrl = img.path;
+        user.imgUrl = imgUrl;
+      }
 
-        return user.save();
-    }).then(result => {
-        res.redirect('/information');
+      return user.save();
+    })
+    .then((result) => {
+      res.redirect("/information");
     })
     .catch((err) => {
-        console.log(err);
+      console.log(err);
     });
 };
