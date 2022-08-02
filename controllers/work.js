@@ -27,12 +27,14 @@ exports.getStart = (req, res, next) => {
     .then((result) => {
       // nếu chưa kết thúc thì render ra giao diện để user kết thúc nó
       if (result) {
+        let start = new Date(result.start);
+
         return res.render("works/start", {
           path: "/checking",
           pageTitle: "Working...",
           disabled: true,
           workerName: result.userId.name,
-          start: result.start.toLocaleString(),
+          start: start.toLocaleString('en-GB', { timeZone: 'Asia/Ho_Chi_Minh' }),
           workPlace: result.workPlace,
           status: "Working...",
           workId: result._id,
@@ -232,6 +234,8 @@ exports.postLeave = (req, res, next) => {
           isAdmin: req.session.userAdmin,
           workerName: user.name,
           workerImg: user.imgUrl,
+          remainAnnualLeave: user.annualLeave,
+          workerId: user._id,
         });
       }
       // nếu ngày bắt đầu rơi vào cuối tuần => sai ngày
@@ -245,6 +249,8 @@ exports.postLeave = (req, res, next) => {
           isAdmin: req.session.userAdmin,
           workerName: user.name,
           workerImg: user.imgUrl,
+          remainAnnualLeave: user.annualLeave,
+          workerId: user._id,
         });
       }
       // nếu ngày  kết thúc rơi vào cuối tuần => sai ngày
@@ -258,6 +264,8 @@ exports.postLeave = (req, res, next) => {
           isAdmin: req.session.userAdmin,
           workerName: user.name,
           workerImg: user.imgUrl,
+          remainAnnualLeave: user.annualLeave,
+          workerId: user._id,
         });
       }
       // nếu nghỉ một ngày thì trường bắt đầu và kết thúc phải trùng cả ngày lẫn giờ đăng ký nghỉ
@@ -274,6 +282,8 @@ exports.postLeave = (req, res, next) => {
           isAdmin: req.session.userAdmin,
           workerName: user.name,
           workerImg: user.imgUrl,
+          remainAnnualLeave: user.annualLeave,
+          workerId: user._id,
         });
       }
 
@@ -316,6 +326,8 @@ exports.postLeave = (req, res, next) => {
           isAdmin: req.session.userAdmin,
           workerName: user.name,
           workerImg: user.imgUrl,
+          remainAnnualLeave: user.annualLeave,
+          workerId: user._id,
         });
       }
       // nếu số giờ nghỉ phép còn lại ít hơn số giờ đăng lý
@@ -329,6 +341,8 @@ exports.postLeave = (req, res, next) => {
           isAdmin: req.session.userAdmin,
           workerName: user.name,
           workerImg: user.imgUrl,
+          remainAnnualLeave: user.annualLeave,
+          workerId: user._id,
         });
       }
 
@@ -412,6 +426,7 @@ exports.postLeave = (req, res, next) => {
         isAdmin: req.session.userAdmin,
         workerName: user.name,
         workerImg: user.imgUrl,
+        workerId: user._id,
       });
     })
     .catch((err) => {
@@ -433,7 +448,7 @@ exports.getLeave = (req, res, next) => {
         isAdmin: req.session.userAdmin,
         workerName: user.name,
         workerImg: user.imgUrl,
-        annualLeave: user.annualLeave,
+        remainAnnualLeave: user.annualLeave,
         workerId: user._id,
       });
     })

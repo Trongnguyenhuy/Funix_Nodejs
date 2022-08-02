@@ -164,7 +164,6 @@ exports.searchProgress = (field, search, array) => {
 
             
             dateLeave = workByDay[0].leave.filter(item => {
-
               return item.dateLeave === work.Day;
             });
             
@@ -221,7 +220,7 @@ exports.timeModified = (progress) => {
     return {
       Day: work.Day,
       start: new Date(work.start),
-      end: new Date(work.end),
+      end: work.end ? new Date(work.end) : null,
       workPlace: work.workPlace,
       totalSessionTime: work.totalSessionTime,
       confirm: work.confirm,
