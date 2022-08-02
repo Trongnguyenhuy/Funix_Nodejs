@@ -181,12 +181,6 @@ exports.postSearch = (req, res, next) => {
   const page = +req.query.page || 1;
   let totalItems = 0;
 
-  //Xử lý search string khi tìm kiếm bằng datetime:
-  search = search.replace("/0", "/");
-
-  if (search.startsWith("0")) {
-    search = search.substring(1, search.length);
-  }
 
   // tìm trong Database và tìm kiếm theo search string
   Work.find({ userId: userId })
