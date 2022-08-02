@@ -3,7 +3,17 @@ const work = require("../models/work");
 // Hàm xuất ra chuỗi Ngày-Tháng-Năm
 const getFullDate = (date) => {
   let month = date.getUTCMonth() + 1;
+
+  if (month < 10 ){
+    month = '0' + month;
+  }
+
   let day = date.getUTCDate();
+
+  if (day < 10 ){
+    day = '0' + day;
+  }
+
   let year = date.getUTCFullYear();
   newdate = day + "/" + month + "/" + year;
   return newdate;
@@ -154,10 +164,8 @@ exports.searchProgress = (field, search, array) => {
 
             
             dateLeave = workByDay[0].leave.filter(item => {
-              const dateLeave = new Date(item.dateLeave);
-              const workDay =  new Date(work.Day);
 
-              return dateLeave.toISOString() === workDay.toISOString();
+              return item.dateLeave === work.Day;
             });
             
             
