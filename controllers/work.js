@@ -384,7 +384,7 @@ exports.postLeave = (req, res, next) => {
           let day = startDay.getUTCDate() + i;
           let year = startDay.getUTCFullYear();
           leave.push({
-            dateLeave: day + "/" + month + "/" + year,
+            dateLeave: '0' + day + "/0" + month + "/" + year,
             hoursLeave: 8,
             reason: reason,
           });

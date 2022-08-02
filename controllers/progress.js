@@ -23,6 +23,7 @@ exports.getProgress = (req, res, next) => {
       let works = utils.timeModified(results);
       // Biến lưu các phiên làm việc được sắp xếp theo ngày tháng
       // kèm theo các đặc tính của ngày
+
       works = utils.getDateWork(works, -1);
 
       // tính tổng số phần tử ngày trong progress để display ra page

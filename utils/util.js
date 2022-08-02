@@ -152,10 +152,16 @@ exports.searchProgress = (field, search, array) => {
               totalTime += work.totalSessionTime;
             }
 
+            
             dateLeave = workByDay[0].leave.filter(item => {
-              return item.dateLeave === work.Day
+              const dateLeave = new Date(item.dateLeave);
+              const workDay =  new Date(work.Day);
+
+              return dateLeave.toISOString() === workDay.toISOString();
             });
             
+            
+
             if(dateLeave.length >= 1){
               hoursLeave = dateLeave[0].hoursLeave;
             }
